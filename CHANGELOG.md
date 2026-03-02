@@ -13,6 +13,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix build script path in CI from `./Build/build.ps1` to `./Build-Module.ps1`
 - Fix push trigger branch name from `develop` to `development`
 - Suppress `PSAvoidUsingConvertToSecureStringWithPlainText` on functions that legitimately convert plaintext tokens from environment variables and credential files
+- Add `SupportsShouldProcess` to 10 state-changing functions (`Update-TfcAccount`, `Update-TfcAccountPassword`, `Update-TfcChangeRequest`, `New-TfcRegistryModuleTestConfigVersion`, `New-TfcRegistryModuleTestRun`, `New-TfcRegistryModuleTestVariable`, `Update-TfcRegistryModuleTestVariable`, `Update-TfcReservedTagKey`, `New-TfcGPGKey`, `Update-TfcGPGKey`)
+- Fix unused `$response` variable in `Publish-TfcProviderVersion` and `Publish-TfcRegistryModuleVersion`
+- Wire up unused `$OrganizationName` parameter in `Get-TfcAuditTrail` to the API URI
+- Add `[OutputType()]` attributes to 14 functions missing return-type declarations
+- Add PSScriptAnalyzer settings file to exclude `PSUseSingularNouns` rule (intentional naming: `*Details`, `*Settings`)
 
 ## [1.0.0] - 2025-10-17
 

@@ -11,6 +11,7 @@
     Boolean indicating success
 #>
 function Remove-TfcUser {
+    [OutputType([bool])]
     [CmdletBinding(SupportsShouldProcess)]
     param(
         [Parameter(Mandatory = $true)]

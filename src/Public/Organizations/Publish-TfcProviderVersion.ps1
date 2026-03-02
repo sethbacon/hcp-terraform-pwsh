@@ -71,7 +71,7 @@ function Publish-TfcProviderVersion {
                 $fileContent = [System.IO.File]::ReadAllBytes($FilePath)
                 Write-Verbose "Uploading provider binary to: $uploadUrl"
 
-                $response = Invoke-RestMethod -Uri $uploadUrl -Method PUT -Body $fileContent -ContentType "application/zip"
+                $null = Invoke-RestMethod -Uri $uploadUrl -Method PUT -Body $fileContent -ContentType "application/zip"
 
                 Write-Verbose "Provider binary published successfully"
                 return $uploadInfo

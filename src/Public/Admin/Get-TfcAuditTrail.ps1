@@ -33,7 +33,7 @@ function Get-TfcAuditTrail {
         $queryParams += "since=$sinceStr"
     }
 
-    $uri = "/organization/audit-trail"
+    $uri = "/organizations/$OrganizationName/audit-trail"
 
     if ($queryParams.Count -gt 0) {
         $uri += "?" + ($queryParams -join "&")

@@ -13,6 +13,7 @@
     PSCustomObject representing the user information
 #>
 function Get-TfcCurrentUser {
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingConvertToSecureStringWithPlainText', '', Justification = 'User-provided token string must be converted to SecureString for Invoke-RestMethod -Authentication Bearer')]
     [CmdletBinding()]
     param(
         [Parameter(Mandatory = $false)]

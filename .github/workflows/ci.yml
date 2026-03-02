@@ -33,7 +33,7 @@ jobs:
           retention-days: 5
 
   test:
-    name: Test (PS ${{ matrix.psversion }})
+    name: Test (PS ${{ matrix.psversion }}-${{ matrix.os }})
     runs-on: ${{ matrix.os }}
     needs: build
     strategy:
@@ -98,7 +98,7 @@ jobs:
       - name: Run PSScriptAnalyzer
         shell: pwsh
         run: |
-          $results = Invoke-ScriptAnalyzer -Path ./Output/TerraformCloud/TerraformCloud.psm1 -Recurse -ReportSummary
+          $results = Invoke-ScriptAnalyzer -Path ./Output/TerraformCloud/TerraformCloud.psm1 -Recurse -ReportSummary -Settings ./.psscriptanalyzer.psd1
 
           if ($results | Where-Object Severity -eq 'Error') {
             Write-Error "PSScriptAnalyzer found errors!"

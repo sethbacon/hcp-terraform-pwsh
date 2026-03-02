@@ -66,7 +66,7 @@ function Publish-TfcRegistryModuleVersion {
                 $fileContent = [System.IO.File]::ReadAllBytes($FilePath)
                 Write-Verbose "Uploading module content to: $uploadUrl"
 
-                $response = Invoke-RestMethod -Uri $uploadUrl -Method PUT -Body $fileContent -ContentType "application/octet-stream"
+                $null = Invoke-RestMethod -Uri $uploadUrl -Method PUT -Body $fileContent -ContentType "application/octet-stream"
 
                 Write-Verbose "Module version published successfully"
                 return $uploadInfo

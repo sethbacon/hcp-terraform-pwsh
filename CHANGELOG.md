@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Remove nonexistent `actions/setup-powershell@v1` from CI workflow; `pwsh` is pre-installed on all GitHub-hosted runners
 - Fix build script path in CI from `./Build/build.ps1` to `./Build-Module.ps1`
 - Fix push trigger branch name from `develop` to `development`
+- Suppress `PSAvoidUsingConvertToSecureStringWithPlainText` on functions that legitimately convert plaintext tokens from environment variables and credential files
 
 ## [1.0.0] - 2025-10-17
 

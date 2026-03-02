@@ -5,6 +5,7 @@
     Sets up the authentication token and headers for Terraform Cloud API calls
 #>
 function Initialize-TfcConnection {
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingConvertToSecureStringWithPlainText', '', Justification = 'Tokens from environment variables and credential files are inherently plaintext')]
     [CmdletBinding()]
     param()
 

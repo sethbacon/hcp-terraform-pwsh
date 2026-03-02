@@ -1,0 +1,139 @@
+# PowerShell Module .gitignore
+
+# PowerShell Gallery artifacts
+*.nupkg
+*.nuspec.bak
+
+# Build artifacts
+build/
+dist/
+out/
+publish/
+
+# Test results and coverage
+TestResults/
+*.trx
+*.coverage
+*.coveragexml
+coverage.xml
+codecov.yml
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+*.cache
+*.bak
+*.swp
+*~
+
+# Test artifacts
+test-results.log
+test-results.xml
+*-TestResults.xml
+Pester-Results.xml
+
+# Credentials and secrets
+*.key
+*.pem
+*.p12
+*.pfx
+credentials.json
+.env
+.env.local
+secrets.json
+
+# Terraform Cloud/Enterprise tokens
+.terraform.d/
+credentials.tfrc.json
+terraform.rc
+
+# IDE and editor files
+.vscode/settings.json
+.vscode/launch.json
+.vscode/tasks.json
+.vscode/.ropeproject
+*.code-workspace
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# PowerShell specific
+$RECYCLE.BIN/
+*.ps1xml
+PSReadLineHistory.txt
+
+# Module development
+.psm1.bak
+.psd1.bak
+
+# CSV data files
+*.csv
+
+# Documentation build artifacts
+docs/_site/
+docs/.jekyll-cache/
+docs/.sass-cache/
+
+# Package management
+packages/
+.nuget/
+
+# Azure/Cloud artifacts
+*.publishsettings
+*.azurePubxml
+
+# Windows installer files
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+
+# Temporary PowerShell transcripts
+PowerShell_transcript.*
+
+# Debug files
+*.pdb
+
+# JetBrains Rider
+.idea/
+*.sln.iml
+
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+bin/
+obj/
+
+# Terraform (if any terraform files are present)
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+crash.log
+crash.*.log
+
+# Local development and testing
+local/
+sandbox/
+scratch/
+temp/
+
+# Mock data exports
+mock-data/
+test-exports/

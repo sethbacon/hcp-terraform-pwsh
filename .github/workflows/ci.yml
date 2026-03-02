@@ -33,7 +33,7 @@ jobs:
           retention-days: 5
 
   test:
-    name: Test (PS ${{ matrix.psversion }})
+    name: Test (PS ${{ matrix.psversion }}-${{ matrix.os }})
     runs-on: ${{ matrix.os }}
     needs: build
     strategy:

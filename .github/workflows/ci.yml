@@ -147,6 +147,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build, test, analyze]
     if: github.event_name == 'release'
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout code
@@ -170,8 +172,36 @@ jobs:
 
           Publish-Module -Path ./Output/TerraformCloud -NuGetApiKey $env:NUGET_API_KEY -Verbose
 
-      - name: Create release notes
+      - name: Package compiled module
         shell: pwsh
         run: |
           $version = (Import-PowerShellDataFile ./Output/TerraformCloud/TerraformCloud.psd1).ModuleVersion
-          Write-Host "Published TerraformCloud module version $version to PowerShell Gallery"
+          Compress-Archive -Path ./Output/TerraformCloud/* -DestinationPath "./TerraformCloud-v${version}.zip"
+          tar -czf "./TerraformCloud-v${version}.tar.gz" -C Output TerraformCloud/
+          Write-Host "Created release archives for v${version}"
+
+      - name: Upload release assets and update notes
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: pwsh
+        run: |
+          $version = (Import-PowerShellDataFile ./Output/TerraformCloud/TerraformCloud.psd1).ModuleVersion
+          $tag = "v${version}"
+
+          # Upload compiled module archives
+          gh release upload $tag "./TerraformCloud-v${version}.zip" "./TerraformCloud-v${version}.tar.gz" --clobber
+
+          # Prepend PSGallery install block to existing release notes
+          $existing = gh release view $tag --json body --jq .body
+          $header = "**Install from PowerShell Gallery:**" + "`n" +
+                    '```powershell' + "`n" +
+                    "Install-Module -Name TerraformCloud -RequiredVersion $version" + "`n" +
+                    '```' + "`n" +
+                    "[View on PowerShell Gallery](https://www.powershellgallery.com/packages/TerraformCloud/$version)" + "`n`n---`n`n"
+          $updated = $header + $existing
+          $notesFile = New-TemporaryFile
+          Set-Content -Path $notesFile -Value $updated -NoNewline
+          gh release edit $tag --notes-file $notesFile
+          Remove-Item $notesFile
+
+          Write-Host "Published TerraformCloud v${version} to PowerShell Gallery with release assets"

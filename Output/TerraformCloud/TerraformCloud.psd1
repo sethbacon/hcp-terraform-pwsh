@@ -18,7 +18,7 @@ ModuleVersion = '1.1.0'
 # CompatiblePSEditions = @()
 
 # ID used to uniquely identify this module
-GUID = 'c17c1c59-5620-4191-b081-5358813d3af4'
+GUID = '24dc0fdc-3a5d-415c-983a-d6a45ba3f218'
 
 # Author of this module
 Author = 'Seth T. Bacon'

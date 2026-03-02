@@ -2,11 +2,11 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [main, development]
   pull_request:
-    branches: [ main ]
+    branches: [main]
   release:
-    types: [ published ]
+    types: [published]
 
 env:
   MODULE_NAME: TerraformCloud
@@ -19,14 +19,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup PowerShell
-        uses: actions/setup-powershell@v1
-
       - name: Build module
         shell: pwsh
         run: |
           Write-Host "Building module..."
-          ./Build/build.ps1
+          ./Build-Module.ps1 -SkipTests
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
@@ -36,26 +33,22 @@ jobs:
           retention-days: 5
 
   test:
-    name: Test (PS ${{ matrix.psversion }})
+    name: Test (PS ${{ matrix.psversion }}-${{ matrix.os }})
     runs-on: ${{ matrix.os }}
     needs: build
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        psversion: ['5.1', '7.x']
+        psversion: ["5.1", "7.x"]
         exclude:
           - os: ubuntu-latest
-            psversion: '5.1'
+            psversion: "5.1"
           - os: macos-latest
-            psversion: '5.1'
+            psversion: "5.1"
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Setup PowerShell ${{ matrix.psversion }}
-        uses: actions/setup-powershell@v1
-        if: matrix.psversion != '5.1'
 
       - name: Install Pester
         shell: pwsh
@@ -91,9 +84,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup PowerShell
-        uses: actions/setup-powershell@v1
-
       - name: Install PSScriptAnalyzer
         shell: pwsh
         run: |
@@ -108,7 +98,7 @@ jobs:
       - name: Run PSScriptAnalyzer
         shell: pwsh
         run: |
-          $results = Invoke-ScriptAnalyzer -Path ./Output/TerraformCloud/TerraformCloud.psm1 -Recurse -ReportSummary
+          $results = Invoke-ScriptAnalyzer -Path ./Output/TerraformCloud/TerraformCloud.psm1 -Recurse -ReportSummary -Settings ./.psscriptanalyzer.psd1
 
           if ($results | Where-Object Severity -eq 'Error') {
             Write-Error "PSScriptAnalyzer found errors!"
@@ -129,9 +119,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Setup PowerShell
-        uses: actions/setup-powershell@v1
 
       - name: Install Pester
         shell: pwsh
@@ -164,9 +151,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Setup PowerShell
-        uses: actions/setup-powershell@v1
 
       - name: Download build artifacts
         uses: actions/download-artifact@v4

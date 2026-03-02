@@ -11,6 +11,7 @@
     Boolean indicating success
 #>
 function Remove-TfcOAuthClient {
+    [OutputType([bool])]
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param(
         [Parameter(Mandatory = $true)]

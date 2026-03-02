@@ -11,6 +11,7 @@
     None
 #>
 function Remove-TfcTeamToken {
+    [OutputType([bool])]
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param(
         [Parameter(Mandatory = $true)]

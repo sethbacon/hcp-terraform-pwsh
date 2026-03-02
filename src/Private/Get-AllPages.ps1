@@ -5,6 +5,7 @@
     Processes paginated API responses and returns all results
 #>
 function Get-AllPages {
+    [OutputType([hashtable])]
     [CmdletBinding()]
     param(
         [Parameter(Mandatory = $true)]

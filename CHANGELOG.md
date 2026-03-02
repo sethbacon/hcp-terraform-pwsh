@@ -5,6 +5,24 @@ All notable changes to the TerraformCloud PowerShell module will be documented i
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Fixed
+
+- Remove nonexistent `actions/setup-powershell@v1` from CI workflow; `pwsh` is pre-installed on all GitHub-hosted runners
+- Fix build script path in CI from `./Build/build.ps1` to `./Build-Module.ps1`
+- Fix push trigger branch name from `develop` to `development`
+- Suppress `PSAvoidUsingConvertToSecureStringWithPlainText` on functions that legitimately convert plaintext tokens from environment variables and credential files
+- Add `SupportsShouldProcess` to 10 state-changing functions (`Update-TfcAccount`, `Update-TfcAccountPassword`, `Update-TfcChangeRequest`, `New-TfcRegistryModuleTestConfigVersion`, `New-TfcRegistryModuleTestRun`, `New-TfcRegistryModuleTestVariable`, `Update-TfcRegistryModuleTestVariable`, `Update-TfcReservedTagKey`, `New-TfcGPGKey`, `Update-TfcGPGKey`)
+- Fix unused `$response` variable in `Publish-TfcProviderVersion` and `Publish-TfcRegistryModuleVersion`
+- Wire up unused `$OrganizationName` parameter in `Get-TfcAuditTrail` to the API URI
+- Add `[OutputType()]` attributes to 14 functions missing return-type declarations
+- Add PSScriptAnalyzer settings file to exclude `PSUseSingularNouns` rule (intentional naming: `*Details`, `*Settings`)
+
+### Changed
+
+- Rewrite README to reflect current 358-function module with accurate API coverage (~95%), complete function reference by category, and updated installation/contributing instructions
+
 ## [1.0.0] - 2025-10-17
 
 ### Added - Initial Release
@@ -360,20 +378,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Migration from Previous Scripts
 
-| Old Script | New Function |
-|------------|--------------|
-| `Get-TFCCurrentState.ps1` | `Get-TfcCurrentStateVersion` |
-| `Get-TFCEntitlementSet.ps1` | `Get-TfcOrganizationEntitlements` |
-| `Get-TFCTeamAccess.ps1` | `Get-TfcTeamAccess` |
-| `Get-TFCTeams.ps1` | `Get-TfcTeam` |
-| `Get-TFCUserFromToken.ps1` | `Get-TfcCurrentUser` |
-| `Get-TFCWorkspaces.ps1` | `Get-TfcWorkspace` |
-| `Get-TFCWorkspaceVariables.ps1` | `Get-TfcWorkspaceVariable` |
-| `Set-TFCWorkspaceVariable.ps1` | `Set-TfcWorkspaceVariable` |
-| `Update-TFCWorkspaceVariable.ps1` | `Update-TfcWorkspaceVariable` |
-| `Remove-TFCWorkspaceVariable.ps1` | `Remove-TfcWorkspaceVariable` |
-| `Find-TFCWorkspace.ps1` | `Find-TfcWorkspace` |
-| `Test-TFCWorkspaceId.ps1` | `Test-TfcWorkspaceId` |
+| Old Script                        | New Function                      |
+| --------------------------------- | --------------------------------- |
+| `Get-TFCCurrentState.ps1`         | `Get-TfcCurrentStateVersion`      |
+| `Get-TFCEntitlementSet.ps1`       | `Get-TfcOrganizationEntitlements` |
+| `Get-TFCTeamAccess.ps1`           | `Get-TfcTeamAccess`               |
+| `Get-TFCTeams.ps1`                | `Get-TfcTeam`                     |
+| `Get-TFCUserFromToken.ps1`        | `Get-TfcCurrentUser`              |
+| `Get-TFCWorkspaces.ps1`           | `Get-TfcWorkspace`                |
+| `Get-TFCWorkspaceVariables.ps1`   | `Get-TfcWorkspaceVariable`        |
+| `Set-TFCWorkspaceVariable.ps1`    | `Set-TfcWorkspaceVariable`        |
+| `Update-TFCWorkspaceVariable.ps1` | `Update-TfcWorkspaceVariable`     |
+| `Remove-TFCWorkspaceVariable.ps1` | `Remove-TfcWorkspaceVariable`     |
+| `Find-TFCWorkspace.ps1`           | `Find-TfcWorkspace`               |
+| `Test-TFCWorkspaceId.ps1`         | `Test-TfcWorkspaceId`             |
 
 ---
 

@@ -11,6 +11,7 @@
     Boolean indicating success
 #>
 function Remove-TfcAuditTrailToken {
+    [OutputType([bool])]
     [CmdletBinding(SupportsShouldProcess)]
     param(
         [Parameter(Mandatory = $true)]

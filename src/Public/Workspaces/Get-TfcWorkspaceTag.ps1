@@ -13,6 +13,7 @@
     Array of tag objects
 #>
 function Get-TfcWorkspaceTag {
+    [OutputType([object[]])]
     [CmdletBinding()]
     param(
         [Parameter(Mandatory = $true)]

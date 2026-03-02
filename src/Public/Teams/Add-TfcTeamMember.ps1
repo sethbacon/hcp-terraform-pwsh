@@ -1,4 +1,5 @@
 function Add-TfcTeamMember {
+    [OutputType([bool])]
     [CmdletBinding(SupportsShouldProcess)]
     param(
         [Parameter(Mandatory = $true)]

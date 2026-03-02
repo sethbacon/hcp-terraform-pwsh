@@ -1,5 +1,102 @@
 # TerraformCloud PowerShell Module - AI Coding Agent Instructions
 
+## Development Workflow
+
+All changes follow this workflow. Do not deviate from it.
+
+### Branches
+
+- `main` — production-ready, tagged releases only. **Must always exist — never delete.**
+- `development` — integration branch; all feature/fix branches merge here first. **Must always exist — never delete.**
+- Feature/fix branches are created from `development`, never from `main`. Delete them from remote after their PR is merged; clean up locally with `git branch -d`.
+
+```bash
+# After a feature/fix PR is merged:
+git push origin --delete fix/short-description   # remove remote branch
+git branch -d fix/short-description              # remove local branch
+git remote prune origin                          # prune stale remote-tracking refs
+```
+
+### Step-by-step
+
+1. **Open a GitHub issue** describing the bug or feature before writing any code.
+
+2. **Create a branch from `development`**:
+
+   ```bash
+   git fetch origin
+   git checkout -b fix/short-description origin/development
+   # or: feature/short-description
+   ```
+
+3. **Implement the change**, updating `CHANGELOG.md` under `[Unreleased]` as you go.
+
+4. **Commit — no co-author attribution**:
+
+   ```bash
+   git add <specific files>
+   git commit -m "fix: short description of what was fixed
+
+   Closes #<issue-number>"
+   ```
+
+5. **Push to origin**:
+
+   ```bash
+   git push -u origin fix/short-description
+   ```
+
+6. **Open a PR from the feature branch → `development`**:
+
+   ```bash
+   gh pr create --base development --title "fix: short description" --body "Closes #<issue>"
+   ```
+
+   - Update `CHANGELOG.md` and any affected docs in this PR if not already done.
+   - Squash-merge into `development` when approved.
+
+7. **Open a PR from `development` → `main`** when the integration branch is ready to ship:
+
+   ```bash
+   gh pr create --base main --title "chore: release vX.Y.Z" --body "..."
+   ```
+
+### Releasing a version
+
+When a release is called for:
+
+1. Promote `[Unreleased]` in `CHANGELOG.md` to the new version with today's date:
+
+   ```markdown
+   ## [X.Y.Z] - YYYY-MM-DD
+   ```
+
+2. Bump `ModuleVersion` in `Build-Module.ps1` to match the new version.
+
+3. Commit directly on `development`:
+
+   ```bash
+   git commit -m "chore: release vX.Y.Z"
+   git push origin development
+   ```
+
+4. Merge `development` → `main` via PR (step 7 above).
+
+5. **After the PR is merged**, tag on `main` and create the GitHub release:
+
+   ```bash
+   git checkout main
+   git pull origin main
+   git tag vX.Y.Z
+   git push origin --tags
+   gh release create vX.Y.Z --title "vX.Y.Z" --notes "See CHANGELOG.md for details"
+   ```
+
+   > **Important**: The tag must be on `main` so the CI publish job checks out the
+   > exact code that is in production. Tagging before the merge would point the
+   > release at a `development` commit that may differ from `main` after merge.
+
+
 ## Module Architecture
 
 This is a **comprehensive PowerShell module wrapper** for the Terraform Cloud/Enterprise API v2, providing standardized PowerShell cmdlets for infrastructure automation. The module follows PowerShell best practices with proper manifest structure, help documentation, and cross-platform compatibility (PowerShell 5.1+ and 7.x).

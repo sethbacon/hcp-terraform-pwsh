@@ -145,7 +145,7 @@ $manifestPath = Join-Path $ModulePath 'TerraformCloud.psd1'
 $manifestParams = @{
     Path              = $manifestPath
     RootModule        = 'TerraformCloud.psm1'
-    ModuleVersion     = '1.0.0'
+    ModuleVersion     = '1.1.0'
     Author            = 'Seth T. Bacon'
     Description       = 'PowerShell module for HCP Terraform (Terraform Cloud/Enterprise) API'
     PowerShellVersion = '7.0'
@@ -153,6 +153,10 @@ $manifestParams = @{
     CmdletsToExport   = @()
     VariablesToExport = @()
     AliasesToExport   = @()
+    Tags              = @('Terraform', 'TerraformCloud', 'HCP', 'IaC', 'Infrastructure', 'API', 'Automation', 'HashiCorp')
+    LicenseUri        = 'https://github.com/sethbacon/hcp-terraform-pwsh/blob/main/LICENSE'
+    ProjectUri        = 'https://github.com/sethbacon/hcp-terraform-pwsh'
+    ReleaseNotes      = 'See https://github.com/sethbacon/hcp-terraform-pwsh/blob/main/CHANGELOG.md'
 }
 
 New-ModuleManifest @manifestParams

@@ -5,6 +5,14 @@ All notable changes to the TerraformCloud PowerShell module will be documented i
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Fixed
+
+- Remove nonexistent `actions/setup-powershell@v1` from CI workflow; `pwsh` is pre-installed on all GitHub-hosted runners
+- Fix build script path in CI from `./Build/build.ps1` to `./Build-Module.ps1`
+- Fix push trigger branch name from `develop` to `development`
+
 ## [1.0.0] - 2025-10-17
 
 ### Added - Initial Release
@@ -360,20 +368,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Migration from Previous Scripts
 
-| Old Script | New Function |
-|------------|--------------|
-| `Get-TFCCurrentState.ps1` | `Get-TfcCurrentStateVersion` |
-| `Get-TFCEntitlementSet.ps1` | `Get-TfcOrganizationEntitlements` |
-| `Get-TFCTeamAccess.ps1` | `Get-TfcTeamAccess` |
-| `Get-TFCTeams.ps1` | `Get-TfcTeam` |
-| `Get-TFCUserFromToken.ps1` | `Get-TfcCurrentUser` |
-| `Get-TFCWorkspaces.ps1` | `Get-TfcWorkspace` |
-| `Get-TFCWorkspaceVariables.ps1` | `Get-TfcWorkspaceVariable` |
-| `Set-TFCWorkspaceVariable.ps1` | `Set-TfcWorkspaceVariable` |
-| `Update-TFCWorkspaceVariable.ps1` | `Update-TfcWorkspaceVariable` |
-| `Remove-TFCWorkspaceVariable.ps1` | `Remove-TfcWorkspaceVariable` |
-| `Find-TFCWorkspace.ps1` | `Find-TfcWorkspace` |
-| `Test-TFCWorkspaceId.ps1` | `Test-TfcWorkspaceId` |
+| Old Script                        | New Function                      |
+| --------------------------------- | --------------------------------- |
+| `Get-TFCCurrentState.ps1`         | `Get-TfcCurrentStateVersion`      |
+| `Get-TFCEntitlementSet.ps1`       | `Get-TfcOrganizationEntitlements` |
+| `Get-TFCTeamAccess.ps1`           | `Get-TfcTeamAccess`               |
+| `Get-TFCTeams.ps1`                | `Get-TfcTeam`                     |
+| `Get-TFCUserFromToken.ps1`        | `Get-TfcCurrentUser`              |
+| `Get-TFCWorkspaces.ps1`           | `Get-TfcWorkspace`                |
+| `Get-TFCWorkspaceVariables.ps1`   | `Get-TfcWorkspaceVariable`        |
+| `Set-TFCWorkspaceVariable.ps1`    | `Set-TfcWorkspaceVariable`        |
+| `Update-TFCWorkspaceVariable.ps1` | `Update-TfcWorkspaceVariable`     |
+| `Remove-TFCWorkspaceVariable.ps1` | `Remove-TfcWorkspaceVariable`     |
+| `Find-TFCWorkspace.ps1`           | `Find-TfcWorkspace`               |
+| `Test-TFCWorkspaceId.ps1`         | `Test-TfcWorkspaceId`             |
 
 ---
 

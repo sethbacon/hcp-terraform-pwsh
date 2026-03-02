@@ -2,11 +2,11 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [main, development]
   pull_request:
-    branches: [ main ]
+    branches: [main]
   release:
-    types: [ published ]
+    types: [published]
 
 env:
   MODULE_NAME: TerraformCloud
@@ -19,14 +19,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup PowerShell
-        uses: actions/setup-powershell@v1
-
       - name: Build module
         shell: pwsh
         run: |
           Write-Host "Building module..."
-          ./Build/build.ps1
+          ./Build-Module.ps1 -SkipTests
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
@@ -42,20 +39,16 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        psversion: ['5.1', '7.x']
+        psversion: ["5.1", "7.x"]
         exclude:
           - os: ubuntu-latest
-            psversion: '5.1'
+            psversion: "5.1"
           - os: macos-latest
-            psversion: '5.1'
+            psversion: "5.1"
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Setup PowerShell ${{ matrix.psversion }}
-        uses: actions/setup-powershell@v1
-        if: matrix.psversion != '5.1'
 
       - name: Install Pester
         shell: pwsh
@@ -90,9 +83,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Setup PowerShell
-        uses: actions/setup-powershell@v1
 
       - name: Install PSScriptAnalyzer
         shell: pwsh
@@ -130,9 +120,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup PowerShell
-        uses: actions/setup-powershell@v1
-
       - name: Install Pester
         shell: pwsh
         run: |
@@ -164,9 +151,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Setup PowerShell
-        uses: actions/setup-powershell@v1
 
       - name: Download build artifacts
         uses: actions/download-artifact@v4

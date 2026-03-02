@@ -19,6 +19,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add `[OutputType()]` attributes to 14 functions missing return-type declarations
 - Add PSScriptAnalyzer settings file to exclude `PSUseSingularNouns` rule (intentional naming: `*Details`, `*Settings`)
 
+### Changed
+
+- Rewrite README to reflect current 358-function module with accurate API coverage (~95%), complete function reference by category, and updated installation/contributing instructions
+
 ## [1.0.0] - 2025-10-17
 
 ### Added - Initial Release

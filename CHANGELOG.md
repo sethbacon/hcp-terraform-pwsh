@@ -5,6 +5,13 @@ All notable changes to the TerraformCloud PowerShell module will be documented i
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0](https://github.com/sethbacon/hcp-terraform-pwsh/compare/v1.1.0...v1.2.0) (2026-05-22)
+
+
+### Features
+
+* automate release assets and PSGallery link in CI publish job ([ed7c3c7](https://github.com/sethbacon/hcp-terraform-pwsh/commit/ed7c3c7bbaa80c8fae4a31c78e8216b72da1b480))
+
 ## [1.1.0] - 2026-03-02
 
 ### Fixed

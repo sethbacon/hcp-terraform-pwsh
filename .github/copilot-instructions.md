@@ -96,6 +96,11 @@ When a release is called for:
    > exact code that is in production. Tagging before the merge would point the
    > release at a `development` commit that may differ from `main` after merge.
 
+   The CI pipeline automatically handles everything after `gh release create`:
+   - Publishes the module to the PowerShell Gallery
+   - Creates and uploads compiled module archives (`.zip` and `.tar.gz`)
+   - Prepends a PowerShell Gallery install block and link to the release notes
+
 
 ## Module Architecture
 

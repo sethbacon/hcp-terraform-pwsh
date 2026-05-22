@@ -1,0 +1,27 @@
+{
+  "draft": true,
+  "force-tag-creation": true,
+  "packages": {
+    ".": {
+      "release-type": "simple",
+      "package-name": "TerraformCloud",
+      "include-component-in-tag": false,
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "Build-Module.ps1"
+        }
+      ],
+      "changelog-sections": [
+        {"type": "feat", "section": "Features"},
+        {"type": "fix", "section": "Bug Fixes"},
+        {"type": "perf", "section": "Performance"},
+        {"type": "deps", "section": "Dependencies"},
+        {"type": "docs", "section": "Documentation"},
+        {"type": "refactor", "section": "Refactor"},
+        {"type": "revert", "section": "Reverts"},
+        {"type": "security", "section": "Security"}
+      ]
+    }
+  }
+}

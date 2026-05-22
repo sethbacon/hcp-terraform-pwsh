@@ -5,6 +5,13 @@ All notable changes to the TerraformCloud PowerShell module will be documented i
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.1](https://github.com/sethbacon/hcp-terraform-pwsh/compare/v1.2.0...v1.2.1) (2026-05-22)
+
+
+### Documentation
+
+* add PSGallery badges and fix stale contributing section ([00cee4b](https://github.com/sethbacon/hcp-terraform-pwsh/commit/00cee4b4fe732f8396f0289d73fb349e0177a969))
+
 ## [1.2.0](https://github.com/sethbacon/hcp-terraform-pwsh/compare/v1.1.0...v1.2.0) (2026-05-22)
 
 

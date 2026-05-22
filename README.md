@@ -1,5 +1,9 @@
 # HCP Terraform PowerShell Module
 
+[![PSGallery Version](https://img.shields.io/powershellgallery/v/TerraformCloud)](https://www.powershellgallery.com/packages/TerraformCloud)
+[![PSGallery Downloads](https://img.shields.io/powershellgallery/dt/TerraformCloud)](https://www.powershellgallery.com/packages/TerraformCloud)
+[![CI](https://github.com/sethbacon/hcp-terraform-pwsh/actions/workflows/ci.yml/badge.svg)](https://github.com/sethbacon/hcp-terraform-pwsh/actions/workflows/ci.yml)
+
 A comprehensive PowerShell module for the [Terraform Cloud / HCP Terraform API v2](https://developer.hashicorp.com/terraform/cloud-docs/api-docs). Provides **358 exported functions** covering ~95% of documented API endpoints with full CRUD support for organizations, workspaces, variables, runs, state management, policies, teams, registry, stacks, and more.
 
 ## Table of Contents
@@ -431,12 +435,7 @@ Get-Command -Module TerraformCloud
 
 ## Contributing
 
-This project follows an issue-driven development workflow. See [`.github/copilot-instructions.md`](.github/copilot-instructions.md) for the full development guide.
-
-1. Open a GitHub issue describing the bug or feature
-2. Create a branch from `development` (`fix/short-description` or `feature/short-description`)
-3. Implement the change, updating `CHANGELOG.md` under `[Unreleased]`
-4. Open a PR targeting `development`
+See [CONTRIBUTING.md](CONTRIBUTING.md) for the full development guide including commit conventions, local build workflow, and the automated release process.
 
 ## License
 
@@ -444,4 +443,4 @@ This project is licensed under the Apache 2.0 License. See [LICENSE](LICENSE) fo
 
 ## Author
 
-Seth T. Bacon - Copyright (c) 2025
+Seth T. Bacon - Copyright (c) 2025-2026

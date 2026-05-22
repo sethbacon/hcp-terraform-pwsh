@@ -80,7 +80,7 @@ jobs:
           zip -r "../TerraformCloud-${{ github.ref_name }}.zip" TerraformCloud/
 
       - name: Attest build provenance
-        uses: actions/attest-build-provenance@db473fddc028af60658334401dc6fa3ffd8669fd # v2
+        uses: actions/attest-build-provenance@a2bbfa25375fe432b6a289bc6b6cd05ecd0c4c32 # v4.1.0
         with:
           subject-path: "TerraformCloud-${{ github.ref_name }}.zip"
 

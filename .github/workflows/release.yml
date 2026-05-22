@@ -89,7 +89,8 @@ jobs:
         env:
           NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
         run: |
-          Publish-Module -Path ./Output/TerraformCloud -NuGetApiKey $env:NUGET_API_KEY -Verbose
+          Install-Module -Name Microsoft.PowerShell.PSResourceGet -Scope CurrentUser -Force -SkipPublisherCheck
+          Publish-PSResource -Path ./Output/TerraformCloud -ApiKey $env:NUGET_API_KEY -Repository PSGallery -Verbose
 
       - name: Create GitHub Release
         run: |

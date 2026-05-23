@@ -1,0 +1,19 @@
+# Default owner for all files
+* @sethbacon
+
+# CI/CD workflows require explicit review
+.github/ @sethbacon
+
+# Module source
+src/ @sethbacon
+
+# Tests
+Tests/ @sethbacon
+
+# Build and release plumbing
+Build-Module.ps1 @sethbacon
+.release-please-config.json @sethbacon
+.release-please-manifest.json @sethbacon
+
+# Security policy
+SECURITY.md @sethbacon

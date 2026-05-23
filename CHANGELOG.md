@@ -5,6 +5,23 @@ All notable changes to the TerraformCloud PowerShell module will be documented i
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.0](https://github.com/sethbacon/hcp-terraform-pwsh/compare/v1.2.1...v1.3.0) (2026-05-23)
+
+
+### Features
+
+* add IP Allow Lists (CIDR Range Lists) cmdlets ([38d950c](https://github.com/sethbacon/hcp-terraform-pwsh/commit/38d950cd43a2e773b7c5a61343ecc9b778a98403))
+* add project and team notification configuration cmdlets ([1850926](https://github.com/sethbacon/hcp-terraform-pwsh/commit/1850926c3444157fc20d9157de73d9694786eed0))
+* add Queries cmdlets ([07b77cd](https://github.com/sethbacon/hcp-terraform-pwsh/commit/07b77cd65712e3577b212fc9d64d41fb8cb77c96))
+* expand Stacks coverage with deployment groups, runs, steps, approvals ([c6be04f](https://github.com/sethbacon/hcp-terraform-pwsh/commit/c6be04ff3f471540e46c3adf1cb4e216df838ae1))
+* expose new agent-pool, run-task, and project parameters ([7d65056](https://github.com/sethbacon/hcp-terraform-pwsh/commit/7d65056cd607cd6df5cbb61f7c4c885ac149c291))
+
+
+### Documentation
+
+* refresh API coverage gap analysis post-implementation ([1df58ae](https://github.com/sethbacon/hcp-terraform-pwsh/commit/1df58ae2fdeb1658a7a1388bf9df6f1344de45a2))
+* update README with new functions and examples ([fc836fa](https://github.com/sethbacon/hcp-terraform-pwsh/commit/fc836fad78fa0e0d5e0cf10c720b09ffee1b8cc8))
+
 ## [1.2.1](https://github.com/sethbacon/hcp-terraform-pwsh/compare/v1.2.0...v1.2.1) (2026-05-22)
 
 

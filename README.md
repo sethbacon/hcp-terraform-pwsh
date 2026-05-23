@@ -4,7 +4,7 @@
 [![PSGallery Downloads](https://img.shields.io/powershellgallery/dt/TerraformCloud)](https://www.powershellgallery.com/packages/TerraformCloud)
 [![CI](https://github.com/sethbacon/hcp-terraform-pwsh/actions/workflows/ci.yml/badge.svg)](https://github.com/sethbacon/hcp-terraform-pwsh/actions/workflows/ci.yml)
 
-A comprehensive PowerShell module for the [Terraform Cloud / HCP Terraform API v2](https://developer.hashicorp.com/terraform/cloud-docs/api-docs). Provides **358 exported functions** covering ~95% of documented API endpoints with full CRUD support for organizations, workspaces, variables, runs, state management, policies, teams, registry, stacks, and more.
+A comprehensive PowerShell module for the [Terraform Cloud / HCP Terraform API v2](https://developer.hashicorp.com/terraform/cloud-docs/api-docs). Provides **396 exported functions** covering ~98% of documented API endpoints with full CRUD support for organizations, workspaces, variables, runs, state management, policies, teams, registry, stacks, IP allowlists, queries, and more.
 
 ## Table of Contents
 
@@ -89,7 +89,7 @@ The module automatically reads tokens from `~/.terraform.d/credentials.tfrc.json
 
 ## Available Functions
 
-**358 exported functions** organized across 30+ categories. Use `Get-Help <FunctionName> -Full` for detailed documentation on any function.
+**396 exported functions** organized across 30+ categories. Use `Get-Help <FunctionName> -Full` for detailed documentation on any function.
 
 ### Account & User Management (19)
 
@@ -151,9 +151,9 @@ The module automatically reads tokens from `~/.terraform.d/credentials.tfrc.json
 
 `Get-TfcRunTask`, `Get-TfcRunTaskDetails`, `New-TfcRunTask`, `Update-TfcRunTask`, `Remove-TfcRunTask`, `Get-TfcWorkspaceRunTask`, `Add-TfcWorkspaceRunTask`, `Update-TfcWorkspaceRunTask`, `Remove-TfcWorkspaceRunTask`, `Get-TfcRunTaskResult`, `Get-TfcRunTaskResultDetails`
 
-### Notification Configurations (5)
+### Notification Configurations (9)
 
-`Get-TfcNotificationConfiguration`, `New-TfcNotificationConfiguration`, `Update-TfcNotificationConfiguration`, `Remove-TfcNotificationConfiguration`, `Test-TfcNotificationConfiguration`
+`Get-TfcNotificationConfiguration`, `New-TfcNotificationConfiguration`, `Update-TfcNotificationConfiguration`, `Remove-TfcNotificationConfiguration`, `Test-TfcNotificationConfiguration`, `New-TfcProjectNotificationConfiguration`, `Get-TfcProjectNotificationConfiguration`, `New-TfcTeamNotificationConfiguration`, `Get-TfcTeamNotificationConfiguration`
 
 ### Agent Pools & Agents (12)
 
@@ -167,9 +167,21 @@ The module automatically reads tokens from `~/.terraform.d/credentials.tfrc.json
 
 `Get-TfcOAuthClient`, `Get-TfcOAuthClientDetails`, `Get-TfcOAuthClientOrganization`, `New-TfcOAuthClient`, `Update-TfcOAuthClient`, `Remove-TfcOAuthClient`, `Get-TfcOAuthToken`, `Get-TfcOAuthTokenDetails`, `Update-TfcOAuthToken`, `Remove-TfcOAuthToken`
 
-### Stacks & Deployments (19)
+### Stacks & Deployments (37)
 
-`Get-TfcStack`, `Get-TfcStackDetails`, `New-TfcStack`, `Update-TfcStack`, `Remove-TfcStack`, `Test-TfcStack`, `Get-TfcStackConfiguration`, `Update-TfcStackConfiguration`, `Get-TfcStackDeployment`, `Get-TfcStackDeploymentDetails`, `Get-TfcStackDeploymentLog`, `New-TfcStackDeployment`, `Stop-TfcStackDeployment`, `Get-TfcStackOutput`, `Get-TfcStackResource`, `Get-TfcDriftDetection`, `Get-TfcDriftStatus`, `Enable-TfcDriftDetection`, `Disable-TfcDriftDetection`
+**Stacks core:** `Get-TfcStack`, `Get-TfcStackDetails`, `New-TfcStack`, `Update-TfcStack`, `Remove-TfcStack`, `Test-TfcStack`, `Get-TfcStackOutput`, `Get-TfcStackResource`
+
+**Stack configurations:** `Get-TfcStackConfiguration`, `Update-TfcStackConfiguration`, `Invoke-TfcStackFetchLatestVCS`, `Get-TfcStackConfigurationDiagnostic`, `Get-TfcStackConfigurationUploadUrl`, `Save-TfcStackConfigurationSourceBundle`
+
+**Stack deployments:** `Get-TfcStackDeployment`, `Get-TfcStackDeploymentDetails`, `Get-TfcStackDeploymentLog`, `New-TfcStackDeployment`, `Stop-TfcStackDeployment`
+
+**Deployment groups:** `Get-TfcStackDeploymentGroup`, `Get-TfcStackDeploymentGroupDetails`, `Approve-TfcStackDeploymentGroupPlans`, `Restart-TfcStackDeploymentGroup`
+
+**Deployment runs:** `Get-TfcStackDeploymentRun`, `Get-TfcStackDeploymentRunDetails`, `Approve-TfcStackDeploymentRunPlans`, `Stop-TfcStackDeploymentRun`
+
+**Deployment steps:** `Get-TfcStackDeploymentStep`, `Get-TfcStackDeploymentStepDetails`, `Get-TfcStackDeploymentStepDiagnostic`, `Get-TfcStackDeploymentStepArtifact`, `Invoke-TfcStackDeploymentStepAdvance`
+
+**Approvals & drift:** `Get-TfcStackApproval`, `Get-TfcDriftDetection`, `Get-TfcDriftStatus`, `Enable-TfcDriftDetection`, `Disable-TfcDriftDetection`
 
 ### HYOK (Host Your Own Key) (11)
 
@@ -206,6 +218,14 @@ The module automatically reads tokens from `~/.terraform.d/credentials.tfrc.json
 ### Enterprise Admin (13)
 
 `Get-TfcAdminSettings`, `Update-TfcAdminSettings`, `Get-TfcSAMLSettings`, `Update-TfcSAMLSettings`, `Revoke-TfcSAMLSettings`, `Get-TfcTwoFactorSettings`, `Update-TfcTwoFactorSettings`, `Get-TfcInvoice`, `Get-TfcInvoiceDetails`, `Get-TfcNextInvoice`, `Get-TfcOrganizationSubscription`, `Get-TfcFeatureSet`, `Get-TfcFeatureSetDetails`
+
+### IP Allow Lists (12)
+
+`Get-TfcIPAllowList`, `New-TfcIPAllowList`, `Get-TfcIPAllowListDetails`, `Update-TfcIPAllowList`, `Remove-TfcIPAllowList`, `Get-TfcIPAllowListRange`, `Add-TfcIPAllowListRange`, `Get-TfcIPAllowListRangeDetails`, `Update-TfcIPAllowListRange`, `Remove-TfcIPAllowListRange`, `Add-TfcIPAllowListAgentPool`, `Remove-TfcIPAllowListAgentPool`
+
+### Queries (4)
+
+`New-TfcQuery`, `Get-TfcQuery`, `Get-TfcQueryDetails`, `Stop-TfcQuery`
 
 ### Additional (7)
 
@@ -365,11 +385,56 @@ Get-TfcStack -Organization "my-org"
 # Create a stack
 New-TfcStack -Organization "my-org" -Name "production-stack"
 
+# Fetch the latest config from VCS
+Invoke-TfcStackFetchLatestVCS -StackId "stack-abc123"
+
+# Walk the deployment hierarchy
+Get-TfcStackDeploymentGroup -StackConfigurationId "stackcfg-abc123"
+Get-TfcStackDeploymentRun -StackDeploymentGroupId "sdg-abc123"
+Get-TfcStackDeploymentStep -StackDeploymentRunId "sdr-abc123"
+
+# Approve all plans in a deployment group
+Approve-TfcStackDeploymentGroupPlans -StackDeploymentGroupId "sdg-abc123"
+
 # Enable drift detection
 Enable-TfcDriftDetection -WorkspaceId "ws-123"
 
 # Check drift status
 Get-TfcDriftStatus -WorkspaceId "ws-123"
+```
+
+### IP Allow Lists
+
+```powershell
+# Create an allowlist that scopes API access by source IP
+$list = New-TfcIPAllowList -Organization "my-org" -Name "office-network" `
+    -EnforcementScope "api" -Description "Corporate office IPs"
+
+# Add CIDR ranges
+Add-TfcIPAllowListRange -IPAllowListId $list.data.id `
+    -CidrRange @("192.168.1.0/24", "10.0.0.0/8")
+
+# Associate with self-hosted agent pools
+Add-TfcIPAllowListAgentPool -IPAllowListId $list.data.id `
+    -AgentPoolId @("apool-abc123")
+
+# List, update, and remove
+Get-TfcIPAllowList -Organization "my-org"
+Update-TfcIPAllowList -IPAllowListId $list.data.id -Enabled $false
+Remove-TfcIPAllowList -IPAllowListId $list.data.id
+```
+
+### Queries
+
+```powershell
+# Submit an async read-only query against a workspace
+$query = New-TfcQuery -WorkspaceId "ws-abc123" -Message "Resource inventory"
+
+# Poll status
+Get-TfcQueryDetails -QueryId $query.data.id
+
+# Cancel a long-running query
+Stop-TfcQuery -QueryId $query.data.id
 ```
 
 ### Using the Generic API Function

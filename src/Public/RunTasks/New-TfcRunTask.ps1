@@ -2,7 +2,9 @@
 .SYNOPSIS
     Creates a run task
 .DESCRIPTION
-    Creates a new run task in an organization
+    Creates a new run task in an organization. Optionally routes the run task
+    through a self-hosted agent pool (requires HCP Terraform Premium plan and the
+    private_run_tasks feature entitlement).
 .PARAMETER Organization
     The organization name
 .PARAMETER Name
@@ -15,8 +17,13 @@
     Whether the task is enabled (default: true)
 .PARAMETER Description
     Optional description
+.PARAMETER AgentPoolId
+    Optional agent pool ID — when set, requests for this run task are routed through
+    the specified self-hosted agent pool (private run tasks)
 .EXAMPLE
     New-TfcRunTask -Organization "my-org" -Name "security-scan" -Url "https://scanner.example.com/validate"
+.EXAMPLE
+    New-TfcRunTask -Organization "my-org" -Name "private-scan" -Url "https://internal.example.com/scan" -AgentPoolId "apool-abc123"
 .OUTPUTS
     PSCustomObject representing the created run task
 #>
@@ -39,7 +46,10 @@ function New-TfcRunTask {
         [bool]$Enabled = $true,
 
         [Parameter(Mandatory = $false)]
-        [string]$Description
+        [string]$Description,
+
+        [Parameter(Mandatory = $false)]
+        [string]$AgentPoolId
     )
 
     $attributes = @{
@@ -56,12 +66,20 @@ function New-TfcRunTask {
         $attributes['description'] = $Description
     }
 
-    $body = @{
-        data = @{
-            type = "tasks"
-            attributes = $attributes
+    $data = @{
+        type = "tasks"
+        attributes = $attributes
+    }
+
+    if ($AgentPoolId) {
+        $data['relationships'] = @{
+            'agent-pool' = @{
+                data = @{ type = 'agent-pools'; id = $AgentPoolId }
+            }
         }
-    } | ConvertTo-Json -Depth 10
+    }
+
+    $body = @{ data = $data } | ConvertTo-Json -Depth 10
 
     Write-Verbose "Creating run task '$Name' in organization '$Organization'"
     if ($PSCmdlet.ShouldProcess("Organization: $Organization", "Create run task: $Name")) {

@@ -2,7 +2,7 @@
 .SYNOPSIS
     Updates a run task
 .DESCRIPTION
-    Updates an existing run task
+    Updates an existing run task, including its optional agent-pool relationship.
 .PARAMETER RunTaskId
     The run task ID
 .PARAMETER Name
@@ -15,8 +15,12 @@
     Whether the task is enabled
 .PARAMETER Description
     New description
+.PARAMETER AgentPoolId
+    Agent pool ID for routing requests (pass empty string to clear)
 .EXAMPLE
     Update-TfcRunTask -RunTaskId "task-abc123" -Enabled $false
+.EXAMPLE
+    Update-TfcRunTask -RunTaskId "task-abc123" -AgentPoolId "apool-xyz789"
 .OUTPUTS
     PSCustomObject representing the updated run task
 #>
@@ -39,7 +43,10 @@ function Update-TfcRunTask {
         [bool]$Enabled,
 
         [Parameter(Mandatory = $false)]
-        [string]$Description
+        [string]$Description,
+
+        [Parameter(Mandatory = $false)]
+        [string]$AgentPoolId
     )
 
     $attributes = @{}
@@ -50,16 +57,26 @@ function Update-TfcRunTask {
     if ($PSBoundParameters.ContainsKey('Enabled')) { $attributes['enabled'] = $Enabled }
     if ($PSBoundParameters.ContainsKey('Description')) { $attributes['description'] = $Description }
 
-    if ($attributes.Count -eq 0) {
+    $relationships = @{}
+    if ($PSBoundParameters.ContainsKey('AgentPoolId')) {
+        if ([string]::IsNullOrEmpty($AgentPoolId)) {
+            $relationships['agent-pool'] = @{ data = $null }
+        } else {
+            $relationships['agent-pool'] = @{
+                data = @{ type = 'agent-pools'; id = $AgentPoolId }
+            }
+        }
+    }
+
+    if ($attributes.Count -eq 0 -and $relationships.Count -eq 0) {
         throw "At least one attribute must be specified for update"
     }
 
-    $body = @{
-        data = @{
-            type = "tasks"
-            attributes = $attributes
-        }
-    } | ConvertTo-Json -Depth 10
+    $data = @{ type = "tasks" }
+    if ($attributes.Count -gt 0) { $data['attributes'] = $attributes }
+    if ($relationships.Count -gt 0) { $data['relationships'] = $relationships }
+
+    $body = @{ data = $data } | ConvertTo-Json -Depth 10
 
     Write-Verbose "Updating run task: $RunTaskId"
     if ($PSCmdlet.ShouldProcess("Run Task: $RunTaskId", "Update run task")) {

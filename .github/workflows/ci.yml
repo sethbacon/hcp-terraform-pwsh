@@ -79,15 +79,13 @@ jobs:
     name: Code Analysis
     runs-on: ubuntu-latest
     needs: build
+    permissions:
+      contents: read
+      security-events: write
 
     steps:
       - name: Checkout code
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
-
-      - name: Install PSScriptAnalyzer
-        shell: pwsh
-        run: |
-          Install-Module -Name PSScriptAnalyzer -Scope CurrentUser -Force -SkipPublisherCheck
 
       - name: Download build artifacts
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
@@ -95,19 +93,36 @@ jobs:
           name: module-build
           path: Output/TerraformCloud/
 
-      - name: Run PSScriptAnalyzer
+      - name: Run PSScriptAnalyzer (SARIF)
+        uses: microsoft/psscriptanalyzer-action@6b2948b1944407914a58661c49941824d149734f # v1.1
+        with:
+          path: ./Output/TerraformCloud/TerraformCloud.psm1
+          recurse: true
+          output: results.sarif
+          settings: ./.psscriptanalyzer.psd1
+
+      - name: Upload SARIF to GitHub Security tab
+        if: always()
+        uses: github/codeql-action/upload-sarif@7211b7c8077ea37d8641b6271f6a365a22a5fbfa # v4.36.0
+        with:
+          sarif_file: results.sarif
+          category: psscriptanalyzer
+
+      - name: Fail on PSScriptAnalyzer errors
         shell: pwsh
         run: |
-          $results = Invoke-ScriptAnalyzer -Path ./Output/TerraformCloud/TerraformCloud.psm1 -Recurse -ReportSummary -Settings ./.psscriptanalyzer.psd1
-
-          if ($results | Where-Object Severity -eq 'Error') {
-            Write-Error "PSScriptAnalyzer found errors!"
+          Install-Module -Name PSScriptAnalyzer -Scope CurrentUser -Force -SkipPublisherCheck
+          $results = Invoke-ScriptAnalyzer -Path ./Output/TerraformCloud/TerraformCloud.psm1 -Recurse -Settings ./.psscriptanalyzer.psd1
+          $errors = $results | Where-Object Severity -eq 'Error'
+          if ($errors) {
+            $errors | Format-Table
+            Write-Error "PSScriptAnalyzer found $($errors.Count) error(s)"
             exit 1
           }
-
-          if ($results | Where-Object Severity -eq 'Warning') {
-            Write-Warning "PSScriptAnalyzer found warnings"
-            $results | Where-Object Severity -eq 'Warning' | Format-Table
+          $warnings = $results | Where-Object Severity -eq 'Warning'
+          if ($warnings) {
+            Write-Host "PSScriptAnalyzer found $($warnings.Count) warning(s):"
+            $warnings | Format-Table
           }
 
   integration-test:

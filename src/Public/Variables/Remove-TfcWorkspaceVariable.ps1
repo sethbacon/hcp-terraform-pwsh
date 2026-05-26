@@ -14,6 +14,7 @@
 #>
 function Remove-TfcWorkspaceVariable {
     [CmdletBinding(SupportsShouldProcess)]
+    [OutputType([bool])]
     param(
         [Parameter(Mandatory = $true)]
         [string]$WorkspaceId,

@@ -1,5 +1,6 @@
 function Remove-TfcOrganizationMembership {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact='High')]
+    [OutputType([bool])]
     param(
         [Parameter(Mandatory = $true)]
         [string]$MembershipId

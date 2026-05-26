@@ -12,6 +12,7 @@
 #>
 function Remove-TfcOrganizationToken {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
+    [OutputType([bool])]
     param(
         [Parameter(Mandatory = $true)]
         [string]$Organization

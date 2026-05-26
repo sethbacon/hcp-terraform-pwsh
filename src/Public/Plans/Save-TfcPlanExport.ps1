@@ -14,6 +14,7 @@
 #>
 function Save-TfcPlanExport {
     [CmdletBinding()]
+    [OutputType([bool])]
     param(
         [Parameter(Mandatory = $true)]
         [string]$PlanExportId,

@@ -134,7 +134,14 @@ $moduleContent += @"
 
 # Write the compiled module file
 $compiledModuleFile = Join-Path $ModulePath 'TerraformCloud.psm1'
-$moduleContent | Out-File -FilePath $compiledModuleFile -Encoding UTF8 -Force
+# UTF-8 with BOM — PSScriptAnalyzer flags PSUseBOMForUnicodeEncodedFile
+# on non-ASCII content without a BOM, and PowerShell 5.1 requires the BOM
+# to detect UTF-8 correctly when loading the module.
+[System.IO.File]::WriteAllText(
+    $compiledModuleFile,
+    $moduleContent,
+    [System.Text.UTF8Encoding]::new($true)
+)
 Write-Host "  ✓ Compiled module: TerraformCloud.psm1" -ForegroundColor Green
 Write-Host "    Total functions: $($exportedFunctions.Count)" -ForegroundColor Gray
 

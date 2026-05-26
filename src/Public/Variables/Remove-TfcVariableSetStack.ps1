@@ -14,6 +14,7 @@
 #>
 function Remove-TfcVariableSetStack {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Medium')]
+    [OutputType([bool])]
     param(
         [Parameter(Mandatory = $true)]
         [string]$VariableSetId,

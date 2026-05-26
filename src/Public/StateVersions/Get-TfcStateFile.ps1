@@ -16,6 +16,7 @@
 #>
 function Get-TfcStateFile {
     [CmdletBinding()]
+    [OutputType([string])]
     param(
         [Parameter(Mandatory = $true)]
         [string]$StateVersionId,

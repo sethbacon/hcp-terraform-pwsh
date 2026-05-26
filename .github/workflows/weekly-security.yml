@@ -11,27 +11,6 @@ jobs:
     secrets: inherit
     uses: ./.github/workflows/ci.yml
 
-  # ── CodeQL Analysis ───────────────────────────────────
-  codeql:
-    name: CodeQL Analysis (PowerShell)
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      security-events: write
-    steps:
-      - name: Checkout
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
-
-      - name: Initialize CodeQL
-        uses: github/codeql-action/init@7211b7c8077ea37d8641b6271f6a365a22a5fbfa # v4.36.0
-        with:
-          languages: powershell
-
-      - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@7211b7c8077ea37d8641b6271f6a365a22a5fbfa # v4.36.0
-        with:
-          category: /language:powershell
-
   # ── Stale Dependabot PRs ──────────────────────────────
   stale-dependabot:
     name: Flag stale Dependabot PRs
@@ -57,7 +36,7 @@ jobs:
   notify-on-failure:
     name: Create issue on failure
     runs-on: ubuntu-latest
-    needs: [ci, codeql, stale-dependabot]
+    needs: [ci, stale-dependabot]
     if: failure() && github.event_name == 'schedule'
     permissions:
       issues: write

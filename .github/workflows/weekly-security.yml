@@ -11,26 +11,31 @@ jobs:
     secrets: inherit
     uses: ./.github/workflows/ci.yml
 
-  # ── CodeQL Analysis ───────────────────────────────────
-  codeql:
-    name: CodeQL Analysis (PowerShell)
+  # ── Legitify: GitHub misconfiguration scan ────────────
+  # Audits this repo's GitHub settings (workflow permissions, secret
+  # scanning posture, fork policies, etc.). The action uploads SARIF
+  # to the Security tab itself when upload_code_scanning is true
+  # (default), so no separate upload step is needed.
+  #
+  # NOTE: GITHUB_TOKEN cannot grant the `administration: read` scope,
+  # so policies that require it (branch protection details, repo
+  # admin settings) will be skipped. For full coverage, switch
+  # github_token to a PAT or GitHub App token with admin:read.
+  legitify:
+    name: Legitify (repo misconfig audit)
     runs-on: ubuntu-latest
     permissions:
       contents: read
       security-events: write
+      actions: read
     steps:
-      - name: Checkout
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
-
-      - name: Initialize CodeQL
-        uses: github/codeql-action/init@7211b7c8077ea37d8641b6271f6a365a22a5fbfa # v4.36.0
+      - name: Run Legitify
+        uses: Legit-Labs/legitify@002049404ef93b207048323fe996eb2330327031 # v1.0.11
         with:
-          languages: powershell
-
-      - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@7211b7c8077ea37d8641b6271f6a365a22a5fbfa # v4.36.0
-        with:
-          category: /language:powershell
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          analyze_self_only: "true"
+          scorecard: "no"
+          upload_code_scanning: "true"
 
   # ── Stale Dependabot PRs ──────────────────────────────
   stale-dependabot:
@@ -57,7 +62,7 @@ jobs:
   notify-on-failure:
     name: Create issue on failure
     runs-on: ubuntu-latest
-    needs: [ci, codeql, stale-dependabot]
+    needs: [ci, legitify, stale-dependabot]
     if: failure() && github.event_name == 'schedule'
     permissions:
       issues: write

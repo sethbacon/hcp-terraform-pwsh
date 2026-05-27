@@ -12,6 +12,7 @@
 #>
 function Remove-TfcSSHKey {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
+    [OutputType([bool])]
     param(
         [Parameter(Mandatory = $true)]
         [string]$SSHKeyId

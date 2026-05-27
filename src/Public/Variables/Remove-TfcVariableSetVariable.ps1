@@ -1,5 +1,6 @@
 function Remove-TfcVariableSetVariable {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact='High')]
+    [OutputType([bool])]
     param(
         [Parameter(Mandatory = $true)]
         [string]$VariableSetId,

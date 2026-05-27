@@ -14,6 +14,7 @@
 #>
 function Set-TfcVariableSetWorkspace {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Low')]
+    [OutputType([bool])]
     param(
         [Parameter(Mandatory = $true)]
         [string]$VariableSetId,

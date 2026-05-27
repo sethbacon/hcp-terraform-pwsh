@@ -42,6 +42,13 @@ jobs:
     name: CI
     needs: guard
     secrets: inherit
+    # Permission ceiling for the reusable workflow. ci.yml's analyze job
+    # uploads SARIF to GitHub code scanning, which requires
+    # security-events: write. Reusable workflows cannot exceed the
+    # caller's per-job permissions, so we must grant it here.
+    permissions:
+      contents: read
+      security-events: write
     uses: ./.github/workflows/ci.yml
 
   # ── Build module and attach to GitHub Release ──────────────────────────────

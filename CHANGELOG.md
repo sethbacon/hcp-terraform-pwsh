@@ -5,6 +5,13 @@ All notable changes to the TerraformCloud PowerShell module will be documented i
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.2](https://github.com/sethbacon/hcp-terraform-pwsh/compare/v1.4.1...v1.4.2) (2026-05-28)
+
+
+### Bug Fixes
+
+* **ci:** grant security-events: write to reusable CI call in release ([#18](https://github.com/sethbacon/hcp-terraform-pwsh/issues/18)) ([43a93f7](https://github.com/sethbacon/hcp-terraform-pwsh/commit/43a93f7e07750442901092c2da467c86db449c17))
+
 ## [1.4.1](https://github.com/sethbacon/hcp-terraform-pwsh/compare/v1.4.0...v1.4.1) (2026-05-27)
 
 

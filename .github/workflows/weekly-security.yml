@@ -37,7 +37,11 @@ jobs:
       actions: read
     steps:
       - name: Run Legitify
-        uses: Legit-Labs/legitify@002049404ef93b207048323fe996eb2330327031 # v1.0.11
+        # Pinned to the post-v1.0.11 main commit (PR #333) that replaces the
+        # internal actions/upload-artifact@v3 — GitHub now hard-fails v3, which
+        # broke every run since the deprecation (issues #20, #21). No tagged
+        # release carries the fix yet; re-pin to a tag once one ships.
+        uses: Legit-Labs/legitify@0cea8da09e19f93630ea00481774f7ae00f5c67a # main @ 2024-09-11 (post-v1.0.11)
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           analyze_self_only: "true"

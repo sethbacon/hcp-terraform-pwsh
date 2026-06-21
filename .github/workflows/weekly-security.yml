@@ -37,6 +37,12 @@ jobs:
       actions: read
     steps:
       - name: Run Legitify
+        # Non-blocking: GITHUB_TOKEN cannot grant the scopes Legitify needs to
+        # self-audit this public repo, so it exits 1 with "insufficient
+        # permissions" on every scheduled run — and no tagged release carries a
+        # graceful skip. Let SARIF upload when it can, but don't fail the whole
+        # weekly run (and auto-file an issue) over this known token limitation.
+        continue-on-error: true
         # Pinned to the post-v1.0.11 main commit (PR #333) that replaces the
         # internal actions/upload-artifact@v3 — GitHub now hard-fails v3, which
         # broke every run since the deprecation (issues #20, #21). No tagged

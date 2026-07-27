@@ -5,6 +5,13 @@ All notable changes to the TerraformCloud PowerShell module will be documented i
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.3](https://github.com/sethbacon/hcp-terraform-pwsh/compare/v1.4.2...v1.4.3) (2026-07-27)
+
+
+### Bug Fixes
+
+* **ci:** correct dependabot schedule interval from biweekly to weekly ([#27](https://github.com/sethbacon/hcp-terraform-pwsh/issues/27)) ([7c6dc39](https://github.com/sethbacon/hcp-terraform-pwsh/commit/7c6dc39c5496e6ed8a4aaa303bd547b0c0c2b3da))
+
 ## [1.4.2](https://github.com/sethbacon/hcp-terraform-pwsh/compare/v1.4.1...v1.4.2) (2026-05-28)
 
 

@@ -137,3 +137,6 @@ temp/
 # Mock data exports
 mock-data/
 test-exports/
+
+# Node (CI tooling only, under .github/; the lockfile itself is tracked)
+node_modules/

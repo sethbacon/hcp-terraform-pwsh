@@ -15,7 +15,16 @@ jobs:
   build:
     name: Build Module
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
+      # hardening-exception: egress-audit — this job transfers artifacts through the
+      #   Actions API and clones this repository; harden-runner has never run in this
+      #   repository, so no endpoint baseline exists and a block policy written
+      #   without one fails closed on its first run; audit is what produces that list
+      - name: Harden the runner
+        uses: step-security/harden-runner@05e31511f85b41b11d1cf0ef85d0992719546e2c # v2.21.0
+        with:
+          egress-policy: audit
       - name: Checkout code
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v6
 
@@ -35,6 +44,7 @@ jobs:
   test:
     name: Test (PS ${{ matrix.psversion }}-${{ matrix.os }})
     runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
     needs: build
     strategy:
       matrix:
@@ -47,6 +57,14 @@ jobs:
             psversion: "5.1"
 
     steps:
+      # hardening-exception: egress-audit — this job transfers artifacts through the
+      #   Actions API and clones this repository; harden-runner has never run in this
+      #   repository, so no endpoint baseline exists and a block policy written
+      #   without one fails closed on its first run; audit is what produces that list
+      - name: Harden the runner
+        uses: step-security/harden-runner@05e31511f85b41b11d1cf0ef85d0992719546e2c # v2.21.0
+        with:
+          egress-policy: audit
       - name: Checkout code
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v6
 
@@ -78,12 +96,22 @@ jobs:
   analyze:
     name: Code Analysis
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     needs: build
     permissions:
       contents: read
       security-events: write
 
     steps:
+      # hardening-exception: egress-audit — this job downloads the CodeQL bundle and
+      #   its query packs, transfers artifacts through the Actions API, and clones
+      #   this repository; harden-runner has never run in this repository, so no
+      #   endpoint baseline exists and a block policy written without one fails closed
+      #   on its first run; audit is what produces that list
+      - name: Harden the runner
+        uses: step-security/harden-runner@05e31511f85b41b11d1cf0ef85d0992719546e2c # v2.21.0
+        with:
+          egress-policy: audit
       - name: Checkout code
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v6
 
@@ -129,10 +157,19 @@ jobs:
   integration-test:
     name: Integration Tests
     runs-on: ubuntu-latest
+    timeout-minutes: 25
     needs: [build, test]
     if: github.event_name == 'push' || github.event_name == 'pull_request'
 
     steps:
+      # hardening-exception: egress-audit — this job transfers artifacts through the
+      #   Actions API and clones this repository; harden-runner has never run in this
+      #   repository, so no endpoint baseline exists and a block policy written
+      #   without one fails closed on its first run; audit is what produces that list
+      - name: Harden the runner
+        uses: step-security/harden-runner@05e31511f85b41b11d1cf0ef85d0992719546e2c # v2.21.0
+        with:
+          egress-policy: audit
       - name: Checkout code
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v6
 

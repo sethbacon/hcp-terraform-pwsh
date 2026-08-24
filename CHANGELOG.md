@@ -5,6 +5,13 @@ All notable changes to the TerraformCloud PowerShell module will be documented i
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.5](https://github.com/sethbacon/hcp-terraform-pwsh/compare/v1.4.4...v1.4.5) (2026-08-24)
+
+
+### Bug Fixes
+
+* **ci:** label the checkout pin v7.0.1, which is what that commit is ([#44](https://github.com/sethbacon/hcp-terraform-pwsh/issues/44)) ([79d5978](https://github.com/sethbacon/hcp-terraform-pwsh/commit/79d597831baf37a1139a21332f22d6d20f9349a6))
+
 ## [1.4.4](https://github.com/sethbacon/hcp-terraform-pwsh/compare/v1.4.3...v1.4.4) (2026-08-20)
 
 

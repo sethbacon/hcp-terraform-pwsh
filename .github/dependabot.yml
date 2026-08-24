@@ -25,6 +25,11 @@ updates:
   # The gate is only meaningful while it parses the way release-please does, so
   # these bumps want checking against release-please's own dependency rather
   # than merging on green.
+    # zizmor dependabot-cooldown: the implicit default is 3 days and the audit
+    # requires 7. Security updates are exempt from cooldown, so this delays
+    # feature bumps and not fixes.
+    cooldown:
+      default-days: 7
   - package-ecosystem: npm
     directory: /.github/commit-message-check
     schedule:
@@ -41,3 +46,8 @@ updates:
       commit-message-check:
         patterns:
           - "*"
+    # zizmor dependabot-cooldown: the implicit default is 3 days and the audit
+    # requires 7. Security updates are exempt from cooldown, so this delays
+    # feature bumps and not fixes.
+    cooldown:
+      default-days: 7

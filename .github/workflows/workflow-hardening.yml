@@ -9,9 +9,14 @@
 # Pointed here it found 25. This repository had the loosest release-please
 # permission model of the thirteen and ran harden-runner zero times anywhere.
 #
-# script-ref MUST equal the pin on the `uses:` line: the checker is taken from
-# shared-workflows at that commit, so this repo cannot weaken its own gate by
-# editing a local copy -- there is no local copy.
+# NO script-ref, deliberately. The workflow derives the checker's commit from
+# `github.job_workflow_sha` -- the commit it was itself resolved at -- so the
+# checker and the workflow cannot disagree and there is no second pin for
+# Dependabot to half-update. It used to take that commit as an input, and every
+# bump landed half-applied and red until a human moved the second line; this
+# repository was the last instance. The checker is still taken from
+# shared-workflows rather than from here, so this repo cannot weaken its own
+# gate by editing a local copy -- there is no local copy.
 name: Workflow Hardening
 
 "on":
@@ -30,6 +35,4 @@ concurrency:
 
 jobs:
   workflow-hardening:
-    uses: 4cloudguru/shared-workflows/.github/workflows/workflow-hardening.yml@0f121ce84fcd06966716146824e9764bd085936e # v1.17.0
-    with:
-      script-ref: 0f121ce84fcd06966716146824e9764bd085936e
+    uses: 4cloudguru/shared-workflows/.github/workflows/workflow-hardening.yml@b5aacb7c52bf279be8fe262a8aa67aa8945bcfec # v1.22.0

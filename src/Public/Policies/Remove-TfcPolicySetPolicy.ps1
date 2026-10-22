@@ -13,6 +13,7 @@
     Boolean indicating success
 #>
 function Remove-TfcPolicySetPolicy {
+    [OutputType([bool])]
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Medium')]
     param(
         [Parameter(Mandatory = $true)]

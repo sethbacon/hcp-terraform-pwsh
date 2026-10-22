@@ -11,6 +11,7 @@
     None
 #>
 function Remove-TfcPolicySet {
+    [OutputType([bool])]
     [CmdletBinding(SupportsShouldProcess)]
     param(
         [Parameter(Mandatory = $true)]

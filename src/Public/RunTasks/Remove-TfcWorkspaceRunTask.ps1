@@ -11,6 +11,7 @@
     None
 #>
 function Remove-TfcWorkspaceRunTask {
+    [OutputType([bool])]
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Medium')]
     param(
         [Parameter(Mandatory = $true)]

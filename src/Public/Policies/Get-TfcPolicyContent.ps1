@@ -15,6 +15,7 @@
     String containing policy content, or file path if OutputPath specified
 #>
 function Get-TfcPolicyContent {
+    [OutputType([string])]
     [CmdletBinding()]
     param(
         [Parameter(Mandatory = $true)]

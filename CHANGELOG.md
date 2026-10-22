@@ -5,6 +5,13 @@ All notable changes to the TerraformCloud PowerShell module will be documented i
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.5.1](https://github.com/sethbacon/hcp-terraform-pwsh/compare/v1.5.0...v1.5.1) (2026-10-22)
+
+
+### Bug Fixes
+
+* **security:** declare OutputType on the 13 cmdlets that return a bool or string ([#63](https://github.com/sethbacon/hcp-terraform-pwsh/issues/63)) ([e44c034](https://github.com/sethbacon/hcp-terraform-pwsh/commit/e44c034ce4e5d844f781675a5b6496005ce886bd))
+
 ## [1.5.0](https://github.com/sethbacon/hcp-terraform-pwsh/compare/v1.4.5...v1.5.0) (2026-08-31)
 
 

@@ -11,6 +11,7 @@
     None
 #>
 function Remove-TfcRunTrigger {
+    [OutputType([bool])]
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param(
         [Parameter(Mandatory = $true)]

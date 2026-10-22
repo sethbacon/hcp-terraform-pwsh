@@ -13,6 +13,7 @@
     Boolean indicating success or failure
 #>
 function Invoke-TfcRegistryModuleTestConfigUpload {
+    [OutputType([bool])]
     [CmdletBinding()]
     param(
         [Parameter(Mandatory = $true)]

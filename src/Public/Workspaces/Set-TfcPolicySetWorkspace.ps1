@@ -13,6 +13,7 @@
     None
 #>
 function Set-TfcPolicySetWorkspace {
+    [OutputType([bool])]
     [CmdletBinding(SupportsShouldProcess)]
     param(
         [Parameter(Mandatory = $true)]

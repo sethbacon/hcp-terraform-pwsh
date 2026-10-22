@@ -11,6 +11,7 @@
     Boolean indicating success
 #>
 function Invoke-TfcConfigurationVersionArchive {
+    [OutputType([bool])]
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Medium')]
     param(
         [Parameter(Mandatory = $true)]

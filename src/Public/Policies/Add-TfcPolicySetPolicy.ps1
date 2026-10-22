@@ -13,6 +13,7 @@
     None
 #>
 function Add-TfcPolicySetPolicy {
+    [OutputType([bool])]
     [CmdletBinding(SupportsShouldProcess)]
     param(
         [Parameter(Mandatory = $true)]

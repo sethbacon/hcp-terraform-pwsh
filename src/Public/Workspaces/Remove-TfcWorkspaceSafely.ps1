@@ -18,6 +18,7 @@
     Boolean indicating success or failure
 #>
 function Remove-TfcWorkspaceSafely {
+    [OutputType([bool])]
     [CmdletBinding(SupportsShouldProcess)]
     param(
         [Parameter(Mandatory = $true)]

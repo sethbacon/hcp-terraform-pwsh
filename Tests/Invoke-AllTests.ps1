@@ -1,4 +1,4 @@
-# Test Runner for TerraformCloud Module
+﻿# Test Runner for TerraformCloud Module
 # Runs all Pester tests with coverage and reporting
 
 [CmdletBinding()]

@@ -1,4 +1,4 @@
-# Generate Pester Test Stubs for All Functions
+﻿# Generate Pester Test Stubs for All Functions
 # Creates test file structure matching src/ directory
 
 param(

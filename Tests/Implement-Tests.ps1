@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
     Implements comprehensive tests for TerraformCloud module functions
 .DESCRIPTION

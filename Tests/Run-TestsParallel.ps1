@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
     Runs tests in parallel using PowerShell 7's ForEach-Object -Parallel.
 

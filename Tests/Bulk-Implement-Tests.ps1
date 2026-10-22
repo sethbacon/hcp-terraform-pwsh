@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
     Bulk implements tests for all TerraformCloud functions
 .DESCRIPTION

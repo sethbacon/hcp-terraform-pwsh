@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
     Runs TerraformCloud module tests with parallel execution support.
 

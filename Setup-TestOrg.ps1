@@ -1,4 +1,4 @@
-#!/usr/bin/env pwsh
+﻿#!/usr/bin/env pwsh
 # Terraform Cloud Test Organization Setup Helper
 # Copyright (c) 2025 Seth T. Bacon. All rights reserved.
 # Licensed under MIT License.

@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
     Implements basic tests for ALL TerraformCloud functions
 .DESCRIPTION

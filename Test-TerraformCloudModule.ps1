@@ -1,4 +1,4 @@
-#!/usr/bin/env pwsh
+﻿#!/usr/bin/env pwsh
 # Comprehensive Test Suite for TerraformCloud PowerShell Module
 # v1.0.0 - 194 functions covered with comprehensive tests
 # Copyright (c) 2025 Seth T. Bacon. All rights reserved.

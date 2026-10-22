@@ -1,4 +1,4 @@
-# TerraformCloud PowerShell Module - Getting Started Example
+﻿# TerraformCloud PowerShell Module - Getting Started Example
 # Copyright (c) 2025 Seth T. Bacon. All rights reserved.
 # Licensed under the MIT License.
 
